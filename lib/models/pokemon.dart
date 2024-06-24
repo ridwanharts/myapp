@@ -1,26 +1,32 @@
+import 'package:myapp/models/pokemon_species.dart';
+
 class Pokemon {
   final int id;
   final String name;
   final String imageUrl;
-  final String type;
+  final List<String> types;
   final String backgroundUrl;
+  final PokemonSpecies? species;
 
-  Pokemon({
-    required this.id,
-    required this.name,
-    required this.imageUrl,
-    required this.type,
-    required this.backgroundUrl,
-  });
+  Pokemon(
+      {required this.id,
+      required this.name,
+      required this.imageUrl,
+      required this.types,
+      required this.backgroundUrl,
+      this.species});
 
   factory Pokemon.fromJson(Map<String, dynamic> json) {
+    List<String> types = (json['types'] as List)
+        .map((typeInfo) => typeInfo['type']['name'] as String)
+        .toList();
+
     return Pokemon(
-      id: json['id'],
-      name: json['name'],
-      imageUrl: json['sprites']['front_default'],
-      type: json['types'][0]['type']['name'],
-      backgroundUrl: json['sprites']['front_default'],
-    );
+        id: json['id'],
+        name: json['name'],
+        imageUrl: json['sprites']['front_default'],
+        types: types,
+        backgroundUrl: json['sprites']['front_default']);
   }
 
   Map<String, dynamic> toMap() {
@@ -28,7 +34,7 @@ class Pokemon {
       'id': id,
       'name': name,
       'imageUrl': imageUrl,
-      'type': type,
+      'type': types,
     };
   }
 
@@ -37,7 +43,7 @@ class Pokemon {
       id: map['id'],
       name: map['name'],
       imageUrl: map['imageUrl'],
-      type: map['type'],
+      types: List<String>.from(map['types']),
       backgroundUrl: map['imageUrl'],
     );
   }

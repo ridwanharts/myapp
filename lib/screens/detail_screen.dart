@@ -25,7 +25,7 @@ class DetailScreen extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-              'Type: ${pokemon.type}',
+              'Type: ${pokemon.types}',
               style: TextStyle(fontSize: 18),
             ),
             // Add more details here

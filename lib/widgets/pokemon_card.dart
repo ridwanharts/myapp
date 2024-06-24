@@ -26,60 +26,89 @@ class PokemonCard extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         child: Container(
           decoration: BoxDecoration(
-            color: getColorFromType(pokemon.type),
+            color: Colors.white,
             borderRadius: BorderRadius.circular(4),
           ),
-          //padding: EdgeInsets.only(left: 4, right: 4, top: 2, bottom: 2),
-          child: Row(
+          child: Column(
             children: [
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(4),
-                      child: (Image.network(
-                        pokemon.imageUrl,
-                        height: 50,
-                        width: 50,
-                      )),
+              Row(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(4),
+                        child: (Image.network(
+                          pokemon.imageUrl,
+                          height: 50,
+                          width: 50,
+                        )),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 12),
+                        child: Column(
+                          children: [
+                            Text(
+                              pokemon.name.toUpperCase(),
+                              textAlign: TextAlign.start,
+                              style: GoogleFonts.oswald(
+                                textStyle: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [],
                     ),
-                    Container(
-                      margin: EdgeInsets.only(left: 12),
-                      child: Column(
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: pokemon.types.map((type) {
+                  return Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: getColorFromType(type),
+                      ),
+                      padding: EdgeInsets.all(4.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            pokemon.name.toUpperCase(),
+                            type.toUpperCase(),
                             textAlign: TextAlign.start,
-                            style: GoogleFonts.plusJakartaSans(
+                            style: GoogleFonts.oswald(
                               textStyle: TextStyle(
-                                fontSize: 14,
+                                fontSize: 12,
                                 fontWeight: FontWeight.normal,
-                                color: Colors.black,
+                                color: Colors.white,
                               ),
                             ),
                           ),
+                          SizedBox(width: 4.0),
+                          Image.network(
+                            getIconTypeFromType(type),
+                            height: 14,
+                            width: 14,
+                          ), // Add spacing between different types
                         ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Image.network(
-                      getIconTypeFromType(pokemon.type),
-                      //color: Colors.black.withOpacity(0.5), // Set 50% transparency
-                      height: 24,
-                      width: 24,
-                    ),
-                  ],
-                ),
-              ),
+                  );
+                }).toList(),
+              )
             ],
           ),
         ),
@@ -121,13 +150,13 @@ class PokemonCard extends StatelessWidget {
   String getIconTypeFromType(String type) {
     switch (type) {
       case 'fire':
-        //return "https://archives.bulbagarden.net/media/upload/thumb/5/5e/Fire_icon.png/40px-Fire_icon.png";
-        return "https://archives.bulbagarden.net/media/upload/b/b3/Fire_icon_Sleep.png";
+        return "https://archives.bulbagarden.net/media/upload/thumb/5/5e/Fire_icon.png/40px-Fire_icon.png";
+      //return "https://archives.bulbagarden.net/media/upload/b/b3/Fire_icon_Sleep.png";
       case 'water':
         return "https://archives.bulbagarden.net/media/upload/thumb/7/7f/Water_icon.png/40px-Water_icon.png";
       case 'grass':
-        //return "https://archives.bulbagarden.net/media/upload/thumb/c/cb/Grass_icon.png/40px-Grass_icon.png";
-        return "https://archives.bulbagarden.net/media/upload/e/ef/Grass_icon_Sleep.png";
+        return "https://archives.bulbagarden.net/media/upload/thumb/c/cb/Grass_icon.png/40px-Grass_icon.png";
+      //return "https://archives.bulbagarden.net/media/upload/e/ef/Grass_icon_Sleep.png";
       case 'flying':
         return "https://archives.bulbagarden.net/media/upload/thumb/f/f0/Flying_icon.png/40px-Flying_icon.png";
       case 'bug':

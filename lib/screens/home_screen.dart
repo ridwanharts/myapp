@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/models/pokemon.dart';
 import 'package:provider/provider.dart';
+import '../models/pokemon_species.dart';
 import '../providers/pokemon_provider.dart';
 import '../widgets/pokemon_card.dart';
 
@@ -10,6 +11,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late Future<PokemonSpecies> _futurePokemonSpecies;
+
+  @override
+  void initState() {
+    super.initState();
+    //_futurePokemonSpecies = PokemonProvider.fetchSpeciesData(1);
+  }
+
   @override
   Widget build(BuildContext context) {
     Pokemon charizard = Pokemon(
@@ -17,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
       name: "charizard",
       imageUrl:
           "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
-      type: "fire",
+      types: ["fire", "flying"],
       backgroundUrl:
           "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",
     );
@@ -27,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
       name: "venusaur",
       imageUrl:
           "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
-      type: "grass",
+      types: ["grass", "poison"],
       backgroundUrl:
           "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png",
     );
@@ -37,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
       name: "blastoise",
       imageUrl:
           "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png",
-      type: "water",
+      types: ["water"],
       backgroundUrl:
           "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png",
     );
