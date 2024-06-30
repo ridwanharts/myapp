@@ -32,44 +32,69 @@ class PokemonCard extends StatelessWidget {
           child: Column(
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(4),
-                        child: (Image.network(
-                          pokemon.imageUrl,
-                          height: 50,
-                          width: 50,
-                        )),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(left: 12),
-                        child: Column(
-                          children: [
-                            Text(
-                              pokemon.name.toUpperCase(),
-                              textAlign: TextAlign.start,
-                              style: GoogleFonts.oswald(
-                                textStyle: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                  Container(
+                    padding: EdgeInsets.all(4),
+                    child: (Image.network(
+                      pokemon.imageUrl,
+                      height: 50,
+                      width: 50,
+                    )),
                   ),
                   Expanded(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [],
+                    child: Container(
+                      color: Colors.amber,
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                child: Text(
+                                  pokemon.name.toUpperCase(),
+                                  textAlign: TextAlign.start,
+                                  style: GoogleFonts.oswald(
+                                    textStyle: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                pokemon.name.toUpperCase(),
+                                textAlign: TextAlign.start,
+                                style: GoogleFonts.oswald(
+                                  textStyle: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 4.0),
+                              Text(
+                                pokemon.name.toUpperCase(),
+                                textAlign: TextAlign.start,
+                                style: GoogleFonts.oswald(
+                                  textStyle: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -82,7 +107,7 @@ class PokemonCard extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: getColorFromType(type),
                       ),
-                      padding: EdgeInsets.all(4.0),
+                      padding: EdgeInsets.all(2.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
