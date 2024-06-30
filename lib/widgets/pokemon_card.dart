@@ -123,7 +123,7 @@ class PokemonCard extends StatelessWidget {
       case 'water':
         return Colors.blueAccent;
       case 'grass':
-        return Colors.greenAccent;
+        return Colors.green;
       case 'bug':
         return Colors.yellow;
       case 'poison':
