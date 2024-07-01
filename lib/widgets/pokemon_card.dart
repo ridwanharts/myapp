@@ -45,53 +45,87 @@ class PokemonCard extends StatelessWidget {
                   ),
                   Expanded(
                     child: Container(
-                      color: Colors.amber,
-                      child: Column(
+                      child: Row(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                child: Text(
-                                  pokemon.name.toUpperCase(),
-                                  textAlign: TextAlign.start,
-                                  style: GoogleFonts.oswald(
-                                    textStyle: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.normal,
-                                      color: Colors.black,
-                                    ),
+                          Expanded(
+                            child: Container(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        child: Text(
+                                          pokemon.name.toUpperCase(),
+                                          textAlign: TextAlign.start,
+                                          style: GoogleFonts.oswald(
+                                            textStyle: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.normal,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        pokemon.name.toUpperCase(),
+                                        textAlign: TextAlign.start,
+                                        style: GoogleFonts.oswald(
+                                          textStyle: TextStyle(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 4.0),
+                                      Text(
+                                        pokemon.name.toUpperCase(),
+                                        textAlign: TextAlign.start,
+                                        style: GoogleFonts.oswald(
+                                          textStyle: TextStyle(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                          Row(
-                            children: [
-                              Text(
-                                pokemon.name.toUpperCase(),
-                                textAlign: TextAlign.start,
-                                style: GoogleFonts.oswald(
-                                  textStyle: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.black,
+                          Expanded(
+                            child: Container(
+                              margin: EdgeInsets.only(right: 8.0),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Container(
+                                        child: Text(
+                                          "#" + pokemon.id.toString(),
+                                          textAlign: TextAlign.start,
+                                          style: GoogleFonts.oswald(
+                                            textStyle: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.normal,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
+                                ],
                               ),
-                              SizedBox(width: 4.0),
-                              Text(
-                                pokemon.name.toUpperCase(),
-                                textAlign: TextAlign.start,
-                                style: GoogleFonts.oswald(
-                                  textStyle: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ],
                       ),
