@@ -21,7 +21,7 @@ class PokemonProvider with ChangeNotifier {
   }
 
   Future<void> fetchInitialData() async {
-    _pokemons = await _dbHelper.fetchPokemons();
+    //_pokemons = await _dbHelper.fetchPokemons();
     _filteredPokemons = _pokemons;
     if (_pokemons.isEmpty) {
       fetchMorePokemons();
@@ -34,18 +34,55 @@ class PokemonProvider with ChangeNotifier {
     final url =
         'https://pokeapi.co/api/v2/pokemon?offset=${_page * _limit}&limit=$_limit';
     final response = await http.get(Uri.parse(url));
+
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
+      List<Future<void>> fetchDetailsTasks = [];
+
       for (var item in data['results']) {
-        final detailResponse = await http.get(Uri.parse(item['url']));
-        final detailData = json.decode(detailResponse.body);
-        final pokemon = Pokemon.fromJson(detailData);
-        _pokemons.add(pokemon);
-        _dbHelper.insertPokemon(pokemon);
+        fetchDetailsTasks.add(fetchPokemonDetails(item['url']));
       }
+
+      await Future.wait(fetchDetailsTasks);
       _page++;
       _filteredPokemons = _pokemons;
       notifyListeners();
+    } else {
+      // Handle error
+      print('Failed to fetch Pokémon list: ${response.statusCode}');
+    }
+  }
+
+  Future<void> fetchPokemonDetails(String url) async {
+    final detailResponse = await http.get(Uri.parse(url));
+    if (detailResponse.statusCode == 200) {
+      final detailData = json.decode(detailResponse.body);
+      var pokemon = Pokemon.fromJson(detailData);
+      pokemon.species = await fetchSpeciesData(pokemon.id);
+      _pokemons.add(pokemon);
+      //_dbHelper.insertPokemon(pokemon);
+    } else {
+      // Handle error
+      print('Failed to fetch Pokémon details: ${detailResponse.statusCode}');
+    }
+  }
+
+  Future<PokemonSpecies?> fetchSpeciesData(int pokemonId) async {
+    if (_speciesCache.containsKey(pokemonId)) {
+      return _speciesCache[pokemonId];
+    }
+
+    final response = await http
+        .get(Uri.parse('https://pokeapi.co/api/v2/pokemon-species/$pokemonId'));
+
+    if (response.statusCode == 200) {
+      final species = PokemonSpecies.fromJson(jsonDecode(response.body));
+      _speciesCache[pokemonId] = species;
+      return species;
+    } else {
+      // Handle error
+      print('Failed to fetch Pokémon species: ${response.statusCode}');
+      return null;
     }
   }
 
@@ -60,21 +97,5 @@ class PokemonProvider with ChangeNotifier {
       }).toList();
     }
     notifyListeners();
-  }
-
-  Future<PokemonSpecies?> fetchSpeciesData(int pokemonId) async {
-    if (_speciesCache.containsKey(pokemonId)) {
-      return _speciesCache[pokemonId]; // Return from cache if available
-    }
-
-    final response = await http
-        .get(Uri.parse('https://pokeapi.co/api/v2/pokemon-species/$pokemonId'));
-    if (response.statusCode == 200) {
-      final species = PokemonSpecies.fromJson(jsonDecode(response.body));
-      _speciesCache[pokemonId] = species; // Cache the species data
-      return species;
-    } else {
-      return null;
-    }
   }
 }

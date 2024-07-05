@@ -6,7 +6,7 @@ class Pokemon {
   final String imageUrl;
   final List<String> types;
   final String backgroundUrl;
-  final PokemonSpecies? species;
+  PokemonSpecies? species;
 
   Pokemon(
       {required this.id,
@@ -26,7 +26,7 @@ class Pokemon {
         name: json['name'],
         imageUrl: json['sprites']['front_default'],
         types: types,
-        backgroundUrl: json['sprites']['front_default']);
+        backgroundUrl: json['sprites']['back_default']);
   }
 
   Map<String, dynamic> toMap() {

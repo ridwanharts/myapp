@@ -27,6 +27,11 @@ class PokemonCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
+            image: DecorationImage(
+                image: NetworkImage(
+                  pokemon.backgroundUrl,
+                ),
+                alignment: Alignment.centerRight),
             borderRadius: BorderRadius.circular(4),
           ),
           child: Column(
@@ -36,11 +41,12 @@ class PokemonCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.all(4),
+                    //padding: EdgeInsets.only(top: 2, bottom: 2, left: 2),
                     child: (Image.network(
                       pokemon.imageUrl,
-                      height: 50,
-                      width: 50,
+                      fit: BoxFit.cover,
+                      height: 80,
+                      width: 80,
                     )),
                   ),
                   Expanded(
@@ -48,6 +54,7 @@ class PokemonCard extends StatelessWidget {
                       child: Row(
                         children: [
                           Expanded(
+                            flex: 3,
                             child: Container(
                               child: Column(
                                 children: [
@@ -60,7 +67,7 @@ class PokemonCard extends StatelessWidget {
                                           textAlign: TextAlign.start,
                                           style: GoogleFonts.oswald(
                                             textStyle: TextStyle(
-                                              fontSize: 14,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.normal,
                                               color: Colors.black,
                                             ),
@@ -72,23 +79,27 @@ class PokemonCard extends StatelessWidget {
                                   Row(
                                     children: [
                                       Text(
-                                        pokemon.name.toUpperCase(),
+                                        pokemon.species!.names
+                                            .elementAt(1)
+                                            .toUpperCase(),
                                         textAlign: TextAlign.start,
                                         style: GoogleFonts.oswald(
                                           textStyle: TextStyle(
-                                            fontSize: 10,
+                                            fontSize: 12,
                                             fontWeight: FontWeight.normal,
                                             color: Colors.black,
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: 4.0),
+                                      SizedBox(width: 5.0),
                                       Text(
-                                        pokemon.name.toUpperCase(),
+                                        pokemon.species!.names
+                                            .elementAt(0)
+                                            .toUpperCase(),
                                         textAlign: TextAlign.start,
                                         style: GoogleFonts.oswald(
                                           textStyle: TextStyle(
-                                            fontSize: 10,
+                                            fontSize: 12,
                                             fontWeight: FontWeight.normal,
                                             color: Colors.black,
                                           ),
@@ -101,6 +112,7 @@ class PokemonCard extends StatelessWidget {
                             ),
                           ),
                           Expanded(
+                            flex: 1,
                             child: Container(
                               margin: EdgeInsets.only(right: 8.0),
                               child: Column(
@@ -184,7 +196,7 @@ class PokemonCard extends StatelessWidget {
       case 'grass':
         return Colors.green;
       case 'bug':
-        return Colors.yellow;
+        return const Color(0xFFADC501);
       case 'poison':
         return Colors.purple;
       case 'fairy':
@@ -196,11 +208,17 @@ class PokemonCard extends StatelessWidget {
       case 'fighting':
         return Colors.red;
       case 'psychic':
-        return Colors.yellowAccent;
+        return const Color(0xFFC7C701);
       case 'dark':
         return Colors.indigo;
       case 'ghost':
         return Colors.purple;
+      case 'ice':
+        return Colors.blueGrey;
+      case 'dragon':
+        return const Color(0xFF770000);
+      case 'rock':
+        return const Color(0xFF5B2911);
       default:
         return Colors.grey;
     }

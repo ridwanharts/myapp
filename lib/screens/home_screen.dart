@@ -21,6 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final pokemonProvider = Provider.of<PokemonProvider>(context);
+
     Pokemon charizard = Pokemon(
       id: 1,
       name: "charizard",
@@ -51,19 +53,42 @@ class _HomeScreenState extends State<HomeScreen> {
           "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png",
     );
 
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text('CARD VIEW'),
+    //     backgroundColor: Colors.black,
+    //   ),
+    //   body: ListView(
+    //     padding: EdgeInsets.zero,
+    //     children: [
+    //       PokemonCard(pokemon: charizard),
+    //       PokemonCard(pokemon: venusaur),
+    //       PokemonCard(pokemon: blastoise),
+    //     ],
+    //   ),
+    // );
     return Scaffold(
       appBar: AppBar(
-        title: Text('CARD VIEW'),
-        backgroundColor: Colors.black,
+        title: Text('Pokedex'),
+        backgroundColor: Colors.white,
       ),
-      body: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          PokemonCard(pokemon: charizard),
-          PokemonCard(pokemon: venusaur),
-          PokemonCard(pokemon: blastoise),
-        ],
-      ),
+      body: pokemonProvider.pokemons.isEmpty
+          ? Center(child: CircularProgressIndicator())
+          : NotificationListener<ScrollNotification>(
+              onNotification: (scrollNotification) {
+                if (scrollNotification is ScrollEndNotification &&
+                    scrollNotification.metrics.extentAfter == 0) {
+                  pokemonProvider.fetchMorePokemons();
+                }
+                return false;
+              },
+              child: ListView.builder(
+                itemCount: pokemonProvider.pokemons.length,
+                itemBuilder: (context, index) {
+                  return PokemonCard(pokemon: pokemonProvider.pokemons[index]);
+                },
+              ),
+            ),
     );
   }
 }
