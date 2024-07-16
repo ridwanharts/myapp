@@ -169,11 +169,17 @@ class PokemonCard extends StatelessWidget {
                             ),
                           ),
                           SizedBox(width: 4.0),
-                          Image.network(
-                            getIconTypeFromType(type),
-                            height: 14,
-                            width: 14,
-                          ), // Add spacing between different types
+                          getIconTypeFromType(type).contains("https")
+                              ? Image.network(
+                                  getIconTypeFromType(type),
+                                  height: 14,
+                                  width: 14,
+                                )
+                              : Image.asset(
+                                  getIconTypeFromType(type),
+                                  height: 14,
+                                  width: 14,
+                                ),
                         ],
                       ),
                     ),
@@ -228,9 +234,10 @@ class PokemonCard extends StatelessWidget {
     switch (type) {
       case 'fire':
         return "https://archives.bulbagarden.net/media/upload/thumb/5/5e/Fire_icon.png/40px-Fire_icon.png";
-      //return "https://archives.bulbagarden.net/media/upload/b/b3/Fire_icon_Sleep.png";
+      //return "https://archives.bulbagarden.net/media/upload/thumb/5/5e/Fire_icon.png/40px-Fire_icon.png";
       case 'water':
-        return "https://archives.bulbagarden.net/media/upload/thumb/7/7f/Water_icon.png/40px-Water_icon.png";
+        //return "https://archives.bulbagarden.net/media/upload/thumb/7/7f/Water_icon.png/40px-Water_icon.png";
+        return "assets/Water_Type_Icon.png";
       case 'grass':
         return "https://archives.bulbagarden.net/media/upload/thumb/c/cb/Grass_icon.png/40px-Grass_icon.png";
       //return "https://archives.bulbagarden.net/media/upload/e/ef/Grass_icon_Sleep.png";
@@ -239,31 +246,42 @@ class PokemonCard extends StatelessWidget {
       case 'bug':
         return "https://archives.bulbagarden.net/media/upload/thumb/7/79/Bug_icon.png/40px-Bug_icon.png";
       case 'poison':
-        return "https://archives.bulbagarden.net/media/upload/thumb/8/84/Poison_icon.png/40px-Poison_icon.png";
+        //return "https://archives.bulbagarden.net/media/upload/thumb/8/84/Poison_icon.png/40px-Poison_icon.png";
+        return "assets/Poison_Type_Icon.png";
       case 'fairy':
-        return "https://archives.bulbagarden.net/media/upload/thumb/5/5a/Fairy_icon.png/40px-Fairy_icon.png";
+        //return "https://archives.bulbagarden.net/media/upload/thumb/5/5a/Fairy_icon.png/40px-Fairy_icon.png";
+        return "assets/Fairy_Type_Icon.png";
       case 'electric':
-        return "https://archives.bulbagarden.net/media/upload/thumb/a/af/Electric_icon.png/40px-Electric_icon.png";
+        //return "https://archives.bulbagarden.net/media/upload/thumb/a/af/Electric_icon.png/40px-Electric_icon.png";
+        return "assets/Electric_Type_Icon.png";
       case 'ground':
-        return "https://archives.bulbagarden.net/media/upload/thumb/5/58/Ground_icon.png/40px-Ground_icon.png";
+        //return "https://archives.bulbagarden.net/media/upload/thumb/5/58/Ground_icon.png/40px-Ground_icon.png";
+        return "assets/Ground_Type_Icon.png";
       case 'fighting':
-        return "https://archives.bulbagarden.net/media/upload/thumb/7/7d/Fighting_icon.png/40px-Fighting_icon.png";
+        //return "https://archives.bulbagarden.net/media/upload/thumb/7/7d/Fighting_icon.png/40px-Fighting_icon.png";
+        return "assets/Fighting_Type_Icon.png";
       case 'psychic':
-        return "https://archives.bulbagarden.net/media/upload/thumb/a/a6/Psychic_icon.png/40px-Psychic_icon.png";
+        //return "https://archives.bulbagarden.net/media/upload/thumb/a/a6/Psychic_icon.png/40px-Psychic_icon.png";
+        return "assets/Psychic_Type_Icon.png";
       case 'dark':
-        return "https://archives.bulbagarden.net/media/upload/thumb/3/33/Dark_icon.png/40px-Dark_icon.png";
+        //return "https://archives.bulbagarden.net/media/upload/thumb/3/33/Dark_icon.png/40px-Dark_icon.png";
+        return "assets/Dark_Type_Icon.png";
       case 'dragon':
         return "https://archives.bulbagarden.net/media/upload/thumb/9/91/Dragon_icon.png/40px-Dragon_icon.png";
       case 'ghost':
         return "https://archives.bulbagarden.net/media/upload/thumb/8/82/Ghost_icon.png/40px-Ghost_icon.png";
       case 'ice':
-        return "https://archives.bulbagarden.net/media/upload/thumb/8/83/Ice_icon.png/40px-Ice_icon.png";
+        //return "https://archives.bulbagarden.net/media/upload/thumb/8/83/Ice_icon.png/40px-Ice_icon.png";
+        return "assets/Ice_Type_Icon.png";
       case 'steel':
-        return "https://archives.bulbagarden.net/media/upload/thumb/b/b8/Steel_icon.png/40px-Steel_icon.png";
+        //return "https://archives.bulbagarden.net/media/upload/thumb/b/b8/Steel_icon.png/40px-Steel_icon.png";
+        return "assets/Steel_Type_Icon.png";
       case 'rock':
-        return "https://archives.bulbagarden.net/media/upload/thumb/f/ff/Rock_icon.png/40px-Rock_icon.png";
+        //return "https://archives.bulbagarden.net/media/upload/thumb/f/ff/Rock_icon.png/40px-Rock_icon.png";
+        return "assets/Rock_Type_Icon.png";
       default:
-        return "https://archives.bulbagarden.net/media/upload/thumb/a/ae/Normal_icon.png/40px-Normal_icon.png";
+        //return "https://archives.bulbagarden.net/media/upload/thumb/a/ae/Normal_icon.png/40px-Normal_icon.png";
+        return "assets/Normal_Type_Icon.png";
     }
   }
 }

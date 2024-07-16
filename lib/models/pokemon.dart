@@ -1,3 +1,4 @@
+import 'package:flutter_map/flutter_map.dart';
 import 'package:myapp/models/pokemon_species.dart';
 
 class Pokemon {
@@ -7,6 +8,7 @@ class Pokemon {
   final List<String> types;
   final String backgroundUrl;
   PokemonSpecies? species;
+  Marker? marker;
 
   Pokemon(
       {required this.id,
@@ -14,7 +16,8 @@ class Pokemon {
       required this.imageUrl,
       required this.types,
       required this.backgroundUrl,
-      this.species});
+      this.species,
+      this.marker});
 
   factory Pokemon.fromJson(Map<String, dynamic> json) {
     List<String> types = (json['types'] as List)
